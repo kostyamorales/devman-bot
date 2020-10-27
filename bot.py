@@ -30,7 +30,7 @@ def get_checklist(token, chat_id):
                 bot.send_message(chat_id,
                                  f'Преподаватель проверил работу: "{name_work}" https://dvmn.org{lesson_url} {message}')
         except requests.exceptions.ReadTimeout as error:
-            logger.info(error)
+            logger.debug(error)
         except ConnectionError as error:
             logger.info(error)
             sleep(30)

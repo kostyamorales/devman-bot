@@ -59,7 +59,8 @@ if __name__ == '__main__':
     my_handler.setFormatter(template_fmt)
     bot = telegram.Bot(telegram_bot_token)
     logger.info('Бот запущен')
-    try:
-        get_checklist(dvmn_token, telegram_chat_id)
-    except Exception as error:
-        logger.info(f'Бот упал с ошибкой: {error}')
+    while True:
+        try:
+            get_checklist(dvmn_token, telegram_chat_id)
+        except Exception as error:
+            logger.info(f'Бот упал с ошибкой: {error}')

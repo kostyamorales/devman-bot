@@ -4,6 +4,19 @@ from time import sleep
 import telegram
 import logging
 
+logger = logging.getLogger()
+
+
+class MyLogsHandler(logging.Handler):
+    def __init__(self, bot_token, chat_id, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.bot = telegram.Bot(bot_token)
+        self.chat_id = chat_id
+
+    def emit(self, record):
+        log_entry = self.format(record)
+        self.bot.send_message(self.chat_id, log_entry)
+
 
 def get_checklist(token, chat_id):
     while True:
@@ -41,19 +54,9 @@ if __name__ == '__main__':
     telegram_chat_id = environ['TELEGRAM_CHAT_ID']
     dvmn_token = environ['DVMN_API_TOKEN']
     telegram_logging_bot_token = environ['TELEGRAM_LOGGING_BOT_TOKEN']
-    logging_bot = telegram.Bot(telegram_logging_bot_token)
-
-
-    class MyLogsHandler(logging.Handler):
-
-        def emit(self, record):
-            log_entry = self.format(record)
-            logging_bot.send_message(telegram_chat_id, log_entry)
-
 
     logging.basicConfig(level='INFO', format='%(filename)s - %(asctime)s - %(levelname)s - %(message)s')
-    logger = logging.getLogger()
-    my_handler = MyLogsHandler()
+    my_handler = MyLogsHandler(telegram_logging_bot_token, telegram_chat_id)
     logger.addHandler(my_handler)
     template_fmt = logging.Formatter(fmt='%(asctime)s - %(levelname)s - %(message)s')
     my_handler.setFormatter(template_fmt)

@@ -3,6 +3,7 @@ import requests
 from time import sleep
 import telegram
 import logging
+from dotenv import load_dotenv
 
 logger = logging.getLogger()
 
@@ -43,13 +44,14 @@ def get_checklist(token, chat_id):
                 bot.send_message(chat_id,
                                  f'Преподаватель проверил работу: "{name_work}" https://dvmn.org{lesson_url} {message}')
         except requests.exceptions.ReadTimeout as error:
-            continue
+            logger.debug(error)
         except ConnectionError as error:
             logger.info(error)
             sleep(30)
 
 
 if __name__ == '__main__':
+    load_dotenv()
     telegram_bot_token = environ['TELEGRAM_BOT_TOKEN']
     telegram_chat_id = environ['TELEGRAM_CHAT_ID']
     dvmn_token = environ['DVMN_API_TOKEN']

@@ -16,7 +16,7 @@ TELEGRAM_LOGGING_BOT_TOKEN | |
 TELEGRAM_CHAT_ID | |
 3. Создайте два `telegram bot`. Для этого отправьте пользователю `@BotFather` в `Telegram` команды `/start` и затем `/newbot`. Вы получите API токен для доступа к боту. Токен первого бота запишите в переменную `TELEGRAM_BOT_TOKEN`, на него будут приходить результаты проверки. Токен второго запишите в `TELEGRAM_LOGGING_BOT_TOKEN` на него будут приходить логи в случае неисправностей. 
 Получите ID чата. Для этого отправьте `@userinfobot` в `Telegram` команду `/start`. В ответ он пришлет `Id`. Запишите его в переменную `TELEGRAM_CHAT_ID`. 
-4. Зарегистрируйтесь на сайте [dvmn.org.](https://dvmn.org/). Получите [API токен](https://dvmn.org/api/docs/) и запишите его в переменную `DWMN_API_TOKEN.
+4. Зарегистрируйтесь на сайте [dvmn.org.](https://dvmn.org/). Получите [API токен](https://dvmn.org/api/docs/) и запишите его в переменную `DVMN_API_TOKEN.
 
 ## Запуск программы
 
